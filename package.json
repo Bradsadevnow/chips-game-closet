@@ -1,0 +1,1 @@
+{"name":"chips-game-closet","private":true,"type":"module","scripts":{"start":"node server.mjs","test":"node --test game.test.mjs server.test.mjs"},"engines":{"node":">=22"}}

@@ -1,0 +1,13 @@
+{
+  "base_url": "http://192.168.1.128:1234/v1",
+  "model": "gpt-oss-20b",
+  "endpoint": "/chat/completions",
+  "tool_choice": "required",
+  "tools_per_turn": [
+    "play_turn"
+  ],
+  "temperature": 0.4,
+  "max_tokens": 4096,
+  "stream": false,
+  "reasoning_effort": "low"
+}

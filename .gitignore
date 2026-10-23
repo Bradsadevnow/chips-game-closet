@@ -1,0 +1,6 @@
+data/
+*.log
+.env
+model-probe.json
+design-references/impeccable/
+design-references/emil-skills/
