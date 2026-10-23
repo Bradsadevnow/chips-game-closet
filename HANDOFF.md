@@ -76,3 +76,10 @@ All local artwork under `assets/chips/`; original imagegen source files also rem
 ## Next conversation
 
 User is ready to share a new idea. Their last product observation: missed win is tuneable. Good next technical options, if requested, include model prompt/representation/eval improvements, latency handling, stronger strategy support explicitly agreed with user, event-driven dialogue and storybook flow. Do not silently replace model decisions with a solver and present them as the model's choices. No changes are required just to resume conversation.
+
+## Update — Liar’s Dice, 2026-10-22
+
+User requested Liar’s Dice. Implemented `liars-dice.mjs`, tests, Game selector, hidden hands, raise/call/reveal, die loss and explicit next rounds. Five dice each, ones wild (only ones for ones bids), ordinary quantity/face ordering without special ones conversion, human opens each round. Whole-match stake settles only when a player runs out of dice. `play_dice` uses the same local model and strict revision/action validation, with retry. Player hand excluded from model context; Chips hand excluded from browser until reveal. Existing saved four-in-row remains intact; server restarted to load changes. Six tests cover rules plus both games’ server flows, settlement, retry and restart using isolated data. `npm test` includes the dice suite.
+
+Live balances remain player 1,010 / Chips 990 and the prior completed four-in-row game is preserved. Actual local-model smoke uses only `data/tests/dice-real-smoke`, port 3211, zero stake; never confuse it with live game data.
+Real-model verification succeeded: first request had a transient connection failure; Retry produced a legal raise from 3×4 to 4×1 in 13.748s. Browser Call liar revealed 3 ones, correctly removed one Chips die, and offered Roll next round. Screenshot: data/tests/liars-dice-reveal.png (isolated smoke match). Desktop and narrow layout inspected. No claims about strategic strength or typical latency.

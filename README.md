@@ -25,3 +25,11 @@ node --test game.test.mjs server.test.mjs
 Tests cover gravity/full columns, all winning directions, draw, invalid model moves, retry, stale revisions, exactly-once settlement and restart persistence using isolated test state and a mock model. The actual local model also completed a zero-stake round. Observed latency ranged from 3.1 seconds to 56.6 seconds; this is a small sample, not a benchmark. Raising the response budget recovered a turn that previously exhausted its budget without returning a tool call. Strategy and dialogue quality remain variable.
 
 Approved backdrop and standalone counter PNGs are integrated. The generated cabinet remains a concept reference; this playable board uses code geometry for accurate holes. Existing card/dice/domino sheets are concept art; dominoes are not yet a full playable set. See `assets/chips/CARD-CHECKLIST.md` for tracked card corrections.
+
+## Liar’s Dice
+
+Choose Liar’s Dice in the Game selector between matches. Five dice each; ones are wild (a bid of ones counts only ones). Raise quantity, or raise face at the same quantity. There is no special ones conversion or exact-call rule. Call liar to reveal both hands: a true bid costs the caller one die, a false bid costs the bidder one die. You open every round. The match ends when one hand has no dice; the engine transfers the stake once for the whole match. Roll next round explicitly after reviewing a reveal.
+
+Chips uses the configured local model with a validated `play_dice` tool. The browser receives only the player's hand and Chips’ dice count until a challenge. The model receives only Chips’ hand, player count, and public bids. Failed model turns preserve the player's action and offer Retry. Existing four-in-a-row state remains compatible. No new dependencies.
+
+Tests: `npm test` (explicit game, dice, and isolated server suites; never bare `node --test`).
